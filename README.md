@@ -1,4 +1,4 @@
-# Aurora Spring 2020 - VN System
+# Project - Paratoxic
 -------
 A Unity project with support for dialogue/visual novels. Supports reading commands and text from a text file.
 
