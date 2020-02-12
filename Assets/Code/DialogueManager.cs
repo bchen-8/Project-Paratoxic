@@ -75,13 +75,13 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 
 		autoNext = false;
 
-		string testString = "testScript.txt"; //tempcode
+		string testString = "testScript"; //tempcode
 		LoadScript(testString);
 	}
 
 	public void LoadScript (string path){ //loads text script into a queue
 		try {
-			StreamReader sr = new StreamReader("Assets/Script/"+path);
+			StreamReader sr = new StreamReader("Assets/Script/"+path+".txt");
 			string line;
 			while ((line = sr.ReadLine()) != null){
 				line = line.Replace("\\n", "\n");

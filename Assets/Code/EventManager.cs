@@ -85,12 +85,14 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
         dialogueBoxScript.PointerFlip(facingRight);
     }
 
-    public void BoxState(int state)
-    {
+    public void BoxState(int state) {
         if (dialogueBoxScript.GetDialogueAnim() == false) {
             dialogueBoxScript.EnableDialogueAnim();
         }
         dialogueBoxScript.SetBoxState(state);
+    }
+    public void NameState(int state) {
+        dialogueBoxScript.SetNameState(state);
     }
     public void UnderColor(Color c) {
         dialogueManager.ChangeUnderlay(c);
@@ -225,6 +227,11 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 			yield return null;
 		}
 	}
+
+    public void CharFlip(int index) {
+        CharList[index].GetComponent<SpriteRenderer>().flipX = !CharList[index].GetComponent<SpriteRenderer>().flipX;
+    }
+
 	public void CharShakeStart(int index, float intensity) { //needs to be improved to allow jitterbugging of multiple characters
 		IEnumerator charShakeStartCoroutine = CharShakeStartCoroutine(index, intensity);
 		charShake = true;
@@ -448,6 +455,10 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 			yield return null;
 		}
 	}
+
+    public void Screenshot(string filename) {
+        ScreenCapture.CaptureScreenshot("Assets/Screenshots/"+filename+".png", 2);
+    }
 
 	public void ChangeResolution(int w, int h, bool full) { //WORK IN PROGRESS
 		Screen.SetResolution(w, h, full);
