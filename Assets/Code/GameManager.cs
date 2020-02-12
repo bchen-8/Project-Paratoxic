@@ -53,32 +53,34 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 		if (playerInControl == true){
 			if (Input.GetKeyDown(KeyCode.Space) /*|| Input.GetKeyDown(KeyCode.Mouse0)*/){
 				if (playingDialogue == false){
-					dialogueManager.LoadNextLine();
-					dialogueManager.AddToHistory(dialogueManager.finalText);
-
-					textCommands.CheckBracket(dialogueManager.GetTextIndex(), true); //Parsing Step #1
-					StartCoroutine("ParseQueue");
-					dialogueManager.StartCoroutine("LetterByLetter"); //Parsing Step #3
+					AdvanceText();
 				} else { //Same functionality as left control/right click while dialogue is playing.
 					dialogueManager.DisplayAllText();
 			    }
 			}
 			if (/*Input.GetKeyDown(KeyCode.LeftControl) || */Input.GetKeyDown(KeyCode.Mouse1)){ //Skips text playback.
 				if (dialogueManager.finalText == ""){
-					dialogueManager.LoadNextLine();
-					dialogueManager.AddToHistory(dialogueManager.finalText);
-
-					textCommands.CheckBracket(dialogueManager.GetTextIndex(), true); //Parsing Step #1
-					StartCoroutine("ParseQueue"); //Parsing Step #2
+					PrepText();
 				}
-				dialogueManager.DisplayAllText(); //Parsing Step #3
+				dialogueManager.DisplayAllText();
 			}
-
 			if (Input.GetKeyDown(KeyCode.C)){ // Open History
 				dialogueManager.HistoryBox();
 			}
 		}
     }
+
+	public void PrepText() {
+		dialogueManager.LoadNextLine();
+		dialogueManager.AddToHistory(dialogueManager.finalText);
+
+		textCommands.CheckBracket(dialogueManager.GetTextIndex(), true);
+		StartCoroutine("ParseQueue");
+	}
+	public void AdvanceText() {
+		PrepText();
+		dialogueManager.StartCoroutine("LetterByLetter");
+	}
 
     IEnumerator ParseQueue(){ //Runs through start-of-line events
 		Debug.Log("Parsing queue...");

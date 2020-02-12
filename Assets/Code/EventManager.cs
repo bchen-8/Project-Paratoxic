@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour //Handles events, such as dialogue box changing, nameplate change, visual effects, branching, etc.
 {
@@ -42,6 +43,7 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 
     void Start()
     {
+		gameManager = GetComponent<GameManager>();
         dialogueManager = GetComponent<DialogueManager>();
 		data = GetComponent<Data>();
 
@@ -93,6 +95,15 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
     public void UnderColor(Color c) {
         dialogueManager.ChangeUnderlay(c);
     }
+
+	public void AutoNext(float time) {
+		dialogueManager.autoNextDelay = time;
+		if (dialogueManager.autoNext == false) {
+			dialogueManager.autoNext = true;
+		} else {
+			dialogueManager.autoNext = false;
+		}
+	}
     #endregion
 
     #region Characters
@@ -488,6 +499,13 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 	public void Flag(string flagName, int value) { //[Flag s=datedPapyrus i=1]
 		int index = data.flagList.IndexOf(data.flagList.Find(x => x.FlagName == flagName));
 		data.flagList[index].FlagValue = value;
+	}
+	#endregion
+
+	#region Scene Management
+	public void LoadScene(string sceneName, string scriptName) { //[LoadScene s=sceneName s=scriptName] temp code while scene setup is in progress
+		dialogueManager.LoadScript(scriptName);
+		SceneManager.LoadScene(sceneName);
 	}
 	#endregion
 

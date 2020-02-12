@@ -35,6 +35,9 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 	public bool delaySignal = false;
 	[HideInInspector]
 	public float delayValue;
+	public bool autoNext;
+	public float autoNextDelay;
+	Timer AutoNextTimer;
 
 	public AudioSource musicSource;
 	public AudioSource voiceSource;
@@ -70,17 +73,21 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		dialogueText.text = "";
 		historyText.text = "";
 
-		LoadScript("Assets/Script/testScript.txt");
+		autoNext = false;
+
+		string testString = "testScript.txt"; //tempcode
+		LoadScript(testString);
 	}
 
-	void LoadScript (string path){ //loads text script into a queue
+	public void LoadScript (string path){ //loads text script into a queue
 		try {
-			StreamReader sr = new StreamReader(path);
+			StreamReader sr = new StreamReader("Assets/Script/"+path);
 			string line;
 			while ((line = sr.ReadLine()) != null){
 				line = line.Replace("\\n", "\n");
 				sceneScript.Add(line);
 			}
+			lineIndex = 0;
 			Debug.Log("List Loaded. Count: "+sceneScript.Count+", Capacity: "+sceneScript.Capacity);
 		} catch (FileNotFoundException e){
 			Debug.Log("<color=red> File failed to read: </color>" + e.Message);
@@ -165,7 +172,16 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		gameManager.playingDialogue = false;
 
         dialogueBoxScript.SetTalking(false);
+
+		if (autoNext == true && lineIndex < sceneScript.Count) {
+			AutoAdvance();
+		}
     }
+
+	public void AutoAdvance() {
+		AutoNextTimer = Timer.Register(autoNextDelay, () => gameManager.AdvanceText());
+		//StartCoroutine("LetterByLetter");
+	}
 	#endregion
 
 	#region History

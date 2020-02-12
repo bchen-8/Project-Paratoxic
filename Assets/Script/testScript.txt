@@ -1,15 +1,15 @@
-﻿[Voice s=GenericVoice2][SpawnChar s=Chen s=chenNeutral v3=-11,0,9.3][CharMove i=0 v3=-6.45,0,9.3][BoxState i=1]It's a text parser that can read off of a text file, register commands from the \ntext, and [PointerMove v3=-4.2,4.2,-1]convert them into method calls with any number of parameters.
-[BoxState i=4] 
-[CharExpress i=0 s=chenThoughtful][BoxState i=2][PointerFlip b=false]With these commands, I can do stuff like [CamShakeOnce f=0.3]trigger camera shake, [PlayMusic s=neverland]activate music\n(still a bit laggy), trigger sound [SFX s=PowerUp01]effects, change the voice soundbite…
-[CharExpress i=0 s=chenNeutral][BoxState i=2][SpawnVFXAt s=TestAnim v3=3,1,0]Play visual effects, [TalkSpeed f=0.035]change [TalkSpeed f=0.1]text [TalkSpeed f=0.023]speed[EndVFX i=0], [CharMove i=0 v3=0,0,9.3][PointerMove v3=-1.23,4.2,-1]control character movement…
-[CharExpress i=0 s=chenThoughtful][BoxState i=2][CharMove i=0 v3=-6,0,9.3][PointerMove v3=-5.5,4.2,-0.1]Perform visual fading[FadeTo f=0.03 c=0,0,0,0], delay text for a bit[Delay f=2][FadeFrom f=0.02 c=0,0,0,1], set flags and jump around the text\nfile based off of flag conditionals, etc.
-[CharExpress i=0 s=chenNeutral][BoxState i=2]It also <i>instantly</i> reads <color="red">rich text markup</color> into the text element, which <size=80%>allows</size> <sup>the</sup>\nuse of a <b>variety</b> of <u>text formatting</u> provided by Textmesh Pro.
-[CharExpress i=0 s=chenSmile][BoxState i=2]All of this can be made to happen in a text file, no programming required.
-[CharExpress i=0 s=chenSerious][BoxState i=2]However, I still need to add save data, scene setup, dialogue choices, and\nmenus, and it's far from feature complete or user-friendly.
-[CharExpress i=0 s=chenSly][BoxState i=2]Yes, this is a visual novel system.
-[CharExpress i=0 s=chenUnamused][BoxState i=2][CharShakeOnce i=0 f=0.2]Yes, I will insist to the day I die that I am not a weeb.
-[CharExpress i=0 s=chenSerious][BoxState i=2]The story's going to be primarily inspired by VA-11 Hall-A and Butterfly Soup,\nalong with a mishmash of other media.
-[CharExpress i=0 s=chenSerious2][BoxState i=2]But first and foremost, it's a story that's kinda personal to me. I'm not sure\nhow much of the story or art I'll actually show this semester.
-[CharExpress i=0 s=chenThoughtful][BoxState i=2][CharMove i=0 v3=-5,0,9.3][PointerMove v3=-3.5,4.2,-0.1]Still! At the very least, I've a prototype that could really be refined and\nexpanded upon for incredible dialogue control.
-[CharExpress i=0 s=chenSerious2][BoxState i=2][CharMove i=0 v3=-6,0,9.3][PointerMove v3=0.278,0.37,-0.1]Also, uh...[Delay f=0.5]when you run out of lines to feed to the engine...
-[CharExpress i=0 s=chenUnamused][StopMusic][BoxState i=2][CharShakeOnce i=0 f=0.5]It kind of breaks.
+[Voice s=GenericVoice2][SpawnChar s=Chen s=chenSmile v3=-11,0,9.3][CharMove i=0 v3=-6.45,0,9.3][BoxState i=1]Awriiiiight, [Delay f=0.3]Checkpoint 1,[Delay f=0.3] whooooooo!
+[CharExpress i=0 s=chenNeutral][BoxState i=2][TalkSpeed f=0.2]. . .
+[CharExpress i=0 s=chenStressedSmile][BoxState i=2]. . .
+[CharExpress i=0 s=chenStressedSmile2][BoxState i=2]. . .
+[BoxState i=2]I uh...[TalkSpeed f=0.023]I don't really have much to show. [Delay f=1]Um.
+[CharExpress i=0 s=chenSerious2][BoxState i=2]Since this is kind of my first really big programming project, I've been having to\nspend a lot of time reworking stuff that was broken or not very future proof.
+[CharExpress i=0 s=chenSmile][BoxState i=2]For example, this cool scrolling background on the dialogue bubble?
+[CharExpress i=0 s=chenUnamused][BoxState i=2]Breaks if you try to change the alpha with animations.
+[CharExpress i=0 s=chenStressedSmile][BoxState i=2]I could probably fix this by making a simple shader and adjusting that over\ntime to coordinate with the dialogue box animations...
+[CharExpress i=0 s=chenUnamused][BoxState i=2]But to do that, I need to change out pretty much all my code involving timing.\nUnity really doesn't offer great tools for that out of the box.
+[CharExpress i=0 s=chenSerious2][BoxState i=2]I've never touched shader programming, either. There's a great video on it in\nthe discord, but it's five hours long and I've made it maybe twenty minutes in.
+[CharExpress i=0 s=chenStressedSmile][BoxState i=2][UnderColor c=0.69,0,1,0.75]Oh,[Delay f=0.2] and I can change the color of the text underlay now!
+[CharExpress i=0 s=chenStressedSmile2][BoxState i=2][TalkSpeed f=0.2][UnderColor c=0,0,0,0.5]. . .[TalkSpeed f=0.023][Delay f=1]yeah that's about all that's new
+[CharExpress i=0 s=chenUnamused][BoxState i=2]Honestly[TalkSpeed f=0.1]...[TalkSpeed f=0.023]I should probably just call it a loss and take a strike for this\ncheckpoint.
+[CharExpress i=0 s=chenSerious][BoxState i=2]Especially since I have nothing to show for art and story[BoxState i=0][LoadScene s=Checkpoint1 s=checkpoint1]

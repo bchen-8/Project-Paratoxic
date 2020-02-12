@@ -103,7 +103,7 @@ public class DialogueBoxScript : MonoBehaviour {
 	}
 
 	public void SetBoxState(int state) {
-		Debug.Log("Called SetBoxState(" + state + ")");
+		//Debug.Log("Called SetBoxState(" + state + ")");
 		boxAnim.SetInteger("animState", state);
 		pointerAnim.SetInteger("animState", state);
 		boxBackAnim.SetInteger("animState", state);
@@ -123,7 +123,7 @@ public class DialogueBoxScript : MonoBehaviour {
 	}
 
 	public void SetTalking(bool boolean) {
-		Debug.Log("Called SetTalking(" + boolean + ")");
+		//Debug.Log("Called SetTalking(" + boolean + ")");
 		boxAnim.SetBool("isTalking", boolean);
 		pointerAnim.SetBool("isTalking", boolean);
 		boxBackAnim.SetBool("isTalking", boolean);
