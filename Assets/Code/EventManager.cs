@@ -340,7 +340,7 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 		}
 	}
 	public void RemoveVFX(int index) {
-		if ((index == -1) || index >= VFXList.Count) {
+		if ((index <= -1) || index >= VFXList.Count) {
 			Destroy(VFXList[VFXList.Count - 1]);
 			VFXList.RemoveAt(VFXList.Count - 1);
 		} else {
