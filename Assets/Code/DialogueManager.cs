@@ -16,7 +16,6 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
     public static DialogueBoxScript dialogueBoxScript;
 
 	//Text Elements
-	public GameObject nameTextObject;
 	public GameObject dialogueTextObject;
 	public GameObject historyTextObject;
 	public TextMeshPro dialogueText;
@@ -61,17 +60,17 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		textCommands = GetComponent<TextCommands>();
         dialogueBoxScript = GameObject.Find("DialogueBox").GetComponent<DialogueBoxScript>();
 
-		nameTextObject = GameObject.FindWithTag("NameText");
 		dialogueTextObject = GameObject.FindWithTag("DialogueText");
-		historyTextObject = GameObject.FindWithTag("HistoryText");
 		dialogueText = dialogueTextObject.GetComponent<TextMeshPro>();
+		dialogueText.text = "";
+
+		/* Commented out for Phone Dialogue System
+		historyTextObject = GameObject.FindWithTag("HistoryText");
 		historyText = historyTextObject.GetComponent<TextMeshProUGUI>();
 		historyTextContainer = historyTextObject.GetComponent<RectTransform>();
-
 		historyTextObject.SetActive(false);
-
-		dialogueText.text = "";
 		historyText.text = "";
+		*/
 
 		autoNext = false;
 
@@ -108,10 +107,55 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		currentText += "<color=\"black\">";
 		textIndex = 0;
 	}
-	IEnumerator LetterByLetter(){ //Plays a line of dialogue
+	public int GetTextIndex() {
+		return textIndex;
+	}
+	public void SetTextIndex(int n) {
+		if (n < finalText.Length) {
+			textIndex = n;
+		} else {
+			Debug.Log("<color=red>SetTextIndex() is attempting to set textIndex(</color>" + textIndex + " > " + n + ") past finalText.Length(" + finalText.Length + ")");
+		}
+	}
+	public void IncrementTextIndex(int i = 1) {
+		textIndex += i;
+	}
+	void ResetTextVariables() {
+		currentText = "";
+		finalText = "";
+		textIndex = 0;
+		gameManager.playingDialogue = false;
+
+		dialogueBoxScript.SetTalking(false);
+
+		if (autoNext == true && lineIndex < sceneScript.Count) {
+			AutoAdvance();
+		}
+	}
+	public void AutoAdvance() {
+		AutoNextTimer = Timer.Register(autoNextDelay, () => gameManager.AdvanceText());
+		//StartCoroutine("LetterByLetter");
+	}
+
+	void CheckNextChar() { //Checks for special characters to run commands. If none detected, displays next character in line.
+		if (finalText[textIndex] == '[') {
+			textCommands.CheckBracket(textIndex, false);
+		} else if (finalText[textIndex] == '<') { //Checking for markup tags and adding them immediately instead of character by character
+			while (finalText[textIndex] != '>') {
+				currentText += finalText[textIndex];
+				textIndex++;
+			}
+			currentText += finalText[textIndex];
+		} else {
+			currentText += finalText[textIndex];
+		}
+	}
+
+	#region MainDialogueSystem
+	IEnumerator LetterByLetter() { //Plays a line of dialogue
 		gameManager.playingDialogue = true;
-        dialogueBoxScript.SetTalking(true);
-		while (textIndex < finalText.Length){
+		dialogueBoxScript.SetTalking(true);
+		while (textIndex < finalText.Length) {
 			CheckNextChar();
 			dialogueText.text = currentText;
 			PlayVoiceClip();
@@ -131,57 +175,21 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		gameManager.playingDialogue = false;
 		StopCoroutine("LetterByLetter");
 		PlayVoiceClip();
-		while (textIndex < finalText.Length){
+		while (textIndex < finalText.Length) {
 			CheckNextChar();
 			dialogueText.text = currentText;
 			textIndex++;
 		}
 		ResetTextVariables();
 	}
-	void CheckNextChar(){ //Checks for special characters to run commands. If none detected, displays next character in line.
-		if (finalText[textIndex] == '[') {
-			textCommands.CheckBracket(textIndex, false);
-		} else if (finalText[textIndex] == '<'){ //Checking for markup tags and adding them immediately instead of character by character
-			while (finalText[textIndex] != '>'){
-				currentText += finalText[textIndex];
-				textIndex++;
-			}
-			currentText += finalText[textIndex];
-		} else {
-			currentText += finalText[textIndex];
-		}
-	}
+	#endregion
 
-	public int GetTextIndex(){
-		return textIndex;
-	}
-	public void SetTextIndex(int n){
-		if (n < finalText.Length){
-			textIndex = n;
-		} else {
-			Debug.Log("<color=red>SetTextIndex() is attempting to set textIndex(</color>" + textIndex+" > "+n+") past finalText.Length("+finalText.Length+")");
-		}
-	}
-	public void IncrementTextIndex(int i = 1){
-		textIndex += i;
-	}
-	void ResetTextVariables(){
-		currentText = "";
-		finalText = "";
-		textIndex = 0;
-		gameManager.playingDialogue = false;
+	#region PhoneDialogueSystem
+	public void NextMessage() {
 
-        dialogueBoxScript.SetTalking(false);
-
-		if (autoNext == true && lineIndex < sceneScript.Count) {
-			AutoAdvance();
-		}
-    }
-
-	public void AutoAdvance() {
-		AutoNextTimer = Timer.Register(autoNextDelay, () => gameManager.AdvanceText());
-		//StartCoroutine("LetterByLetter");
 	}
+	#endregion
+
 	#endregion
 
 	#region History
@@ -230,7 +238,7 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		}
 		if (finalText[textIndex] != ' ' || finalText[textIndex] != '[' || finalText[textIndex] != '<' || finalText[textIndex] != ']' || finalText[textIndex] != '>' || finalText[textIndex] != '=') {
 				voiceSource.Play();
-			}
+		}
 	}
 
     public void ChangeUnderlay (Color c) {

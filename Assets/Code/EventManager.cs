@@ -71,24 +71,37 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 	public void Test4(Color c, Vector2 v) {
 		Debug.Log("Test4() activated! color = " + c.ToString() +", Vector2 = " + v.ToString());
 	}
-    #endregion
+	#endregion
 
-    #region Dialogue
-    public void TalkSpeed(float speed) { //[TalkSpeed f=0.35]
+	#region Dialogue
+
+	#region MainDialogueSystem
+	public void TalkSpeed(float speed) { //[TalkSpeed f=0.35]
 		dialogueManager.waitTime = speed;
-    }
+	}
 
-    public void PointerMove(Vector3 location) {
-        dialogueBoxScript.PointerMove(location);
-    }
+	public void PointerMove(Vector3 location) {
+		dialogueBoxScript.PointerMove(location);
+	}
 	public void PointerSet(Vector3 location) {
 		dialogueBoxScript.PointerSet(location);
 	}
-    public void PointerFlip() {
-        dialogueBoxScript.PointerFlip();
-    }
+	public void PointerFlip() {
+		dialogueBoxScript.PointerFlip();
+	}
+	#endregion
 
-    public void BoxState(int state) {
+	#region PhoneDialogueSystem
+	public void MessageSide(bool rightSide) { //Command for making text messages after the command is called spawn on the left or right
+
+	}
+
+	#endregion
+
+	public void ControlMode(int mode) {
+		gameManager.controlMode = mode;
+	}
+	public void BoxState(int state) {
         if (dialogueBoxScript.GetDialogueAnim() == false) {
             dialogueBoxScript.EnableDialogueAnim();
         }

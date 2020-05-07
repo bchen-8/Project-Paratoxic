@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 	public static Data data;
 
 	//Values
+	public int controlMode;
 	[HideInInspector]
 	public bool playerInControl = true;
     [HideInInspector]
@@ -46,7 +47,9 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
         
         speaker = data.speakerList[0];
 
-		Resources.LoadAsync("");
+		controlMode = 1; //Phone controls
+
+		Resources.LoadAsync(""); //Literally just loads every asset on boot. Probably not the best way to go about it, but sucks for now
     }
 
     // Update is called once per frame
@@ -54,23 +57,55 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
     {
 		if (playerInControl == true){
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)){
-				if (playingDialogue == false){
-					AdvanceText();
-				} else { //Same functionality as left control/right click while dialogue is playing.
-					dialogueManager.DisplayAllText();
-			    }
+				InputSelect(controlMode);
 			}
 			if (/*Input.GetKeyDown(KeyCode.LeftControl) || */Input.GetKeyDown(KeyCode.Mouse1)){ //Skips text playback.
-				if (dialogueManager.finalText == ""){
-					PrepText();
-				}
-				dialogueManager.DisplayAllText();
+				InputBack(controlMode);
 			}
+			/* Commented out. History box incomplete atm.
 			if (Input.GetKeyDown(KeyCode.C)){ // Open History
 				dialogueManager.HistoryBox();
 			}
+			*/
 		}
     }
+
+	#region Input
+	public void InputSelect(int mode) {
+		switch (mode) {
+			case 0: //Normal Dialogue
+				if (playingDialogue == false) {
+					AdvanceText();
+				} else { //Same functionality as left control/right click while dialogue is playing.
+					dialogueManager.DisplayAllText();
+				}
+				break;
+			case 1: //Phone System
+
+				break;
+			default:
+				Debug.Log("InputSelect failed, controlMode int in GameManager is set to an invalid value: "+mode);
+				break;
+		}
+	}
+
+	public void InputBack(int mode) {
+		switch (mode) {
+			case 0: //Normal Dialogue
+				if (dialogueManager.finalText == "") {
+					PrepText();
+				}
+				dialogueManager.DisplayAllText();
+				break;
+			case 1: //Phone System
+				InputSelect(controlMode);
+				break;
+			default:
+				Debug.Log("InputSelect failed, controlMode int in GameManager is set to an invalid value: " + mode);
+				break;
+		}
+	}
+	#endregion
 
 	public void PrepText() {
 		dialogueManager.LoadNextLine();
@@ -112,5 +147,12 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 	}
 	bool getPlayerControl () {
 		return playerInControl;
+	}
+
+	void SetControlMode (int mode) {
+		controlMode = mode;
+	}
+	int getControlMode () {
+		return controlMode;
 	}
 }
