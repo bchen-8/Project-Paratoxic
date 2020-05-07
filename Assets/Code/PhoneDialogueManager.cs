@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
 public class PhoneDialogueManager : MonoBehaviour
 {
-    [SerializeField]
     private TextCommands textCommands;
-    [SerializeField]
     private GameManager gameManager;
 
     //Text Elements
@@ -81,6 +80,8 @@ public class PhoneDialogueManager : MonoBehaviour
         gameManager.playingDialogue = false;
 
         PlayVoiceClip();
+        StartCoroutine(WriteTextOut());
+        //ResetTextVariables();
     }
 
     private void PlayVoiceClip()
@@ -97,9 +98,69 @@ public class PhoneDialogueManager : MonoBehaviour
         voiceSource.Play();
     }
 
+    private IEnumerator WriteTextOut()
+    {
+        string parsedLine = ProcessInitialBrackets(lineToDisplay);
+
+        for(int i = 0; i < parsedLine.Length; i++)
+        {
+            if(IsItABracket(parsedLine[i]))
+            {
+                parsedLine = ProcessSingleBracket(parsedLine);
+            }
+        }
+        foreach (char letter in parsedLine)
+        {
+
+            yield return null;
+        }
+    }
+
+    private string ProcessInitialBrackets(string lineToProcess)
+    {
+        string initialBracketsPattern = @"([.*?])+[.*?]";
+        string bracketSeparationPattern = @"[.*?]";
+
+        string capturedBrackets = Regex.Match(lineToProcess, initialBracketsPattern).Groups[0].Value;
+
+        foreach (Match match in Regex.Matches(capturedBrackets, bracketSeparationPattern))
+        {
+            textCommands.ProcessEvent(match.Value, isStartOfLine: true);
+        }
+
+        return lineToProcess.Substring(capturedBrackets.Length);
+    }
+
+    private bool IsItABracket(char letter)
+    {
+        return letter == '[';
+    }
+
+    private string ProcessSingleBracket(string lineToProcess)
+    {
+        string bracketSeparationPattern = @"[.*?]";
+        Match match = Regex.Match(lineToProcess, bracketSeparationPattern);
+        string bracket = match.Value;
+        textCommands.ProcessEvent(bracket, isStartOfLine: false);
+
+        return lineToProcess.Remove(match.Index, bracket.Length);
+    }
+
     private void CheckNextChar()
     {
-        if(lineToDisplay[currentCharInLineIndex])
+        if(lineToDisplay[currentCharInLineIndex] == '[')
+        {
+            textCommands.CheckBracket(currentCharInLineIndex, isStartOfLine: false);
+        }
+        else
+        {
+
+        }
+    }
+
+    private void CheckBracket()
+    {
+
     }
 
     // Update is called once per frame
