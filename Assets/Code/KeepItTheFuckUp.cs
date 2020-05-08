@@ -8,13 +8,21 @@ public class KeepItTheFuckUp : MonoBehaviour
     private Transform transform;
     [SerializeField]
     private int ZLevel = 100;
+    private GameObject phone;
 
+
+    private void OnDestroy() {
+        {
+            phone.SetActive(true);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         transform = GameObject.Find("DialogueBox").transform;
         GameObject.Find("BoxPointerGroup").SetActive(false);
-        GameObject.Find("Phone").SetActive(false);
+        phone = GameObject.Find("Phone");
+        phone.SetActive(false);
     }
 
     private void LateUpdate()
