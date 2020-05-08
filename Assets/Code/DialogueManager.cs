@@ -186,6 +186,18 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 
 	#region PhoneDialogueSystem
 	public void NextMessage() {
+	// TODO: Everything for new message:
+	// Prefab of texts with lines dumped in
+	// some parameters for left/right align
+	// be able to flip text box sprite
+	// get appropriate size sprite for message
+	// slide up all previous messages / spawn message below and have it lerp up pushing up others
+	// not a lot of rich text - read commands for message calls embedded in script (animation events, etc.)
+	// Change underlay color (existing function) Change text color 
+	// Need to make a second TMP object or material in scene to assign to one persons' message vs other
+	// Thats all for Phone Dialogue
+
+	// 
 
 	}
 	#endregion

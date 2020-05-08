@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
     }
 
 	#region Input
+
+	// TODO: QTE - Once VFX is done for animation (after QTE), changes back to phone 
+	// TODO: QTE - Command in Script - Tells Dialoge Manager/Game Manager to prep extended messages (etiher to a point in the script or a predetermined number set by command
+
 	public void InputSelect(int mode) {
 		switch (mode) {
 			case 0: //Normal Dialogue
@@ -81,7 +85,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 				}
 				break;
 			case 1: //Phone System
-
+				// TODO: Call Next message from Dialogue Manager for PS
 				break;
 			default:
 				Debug.Log("InputSelect failed, controlMode int in GameManager is set to an invalid value: "+mode);
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 				dialogueManager.DisplayAllText();
 				break;
 			case 1: //Phone System
+				// Process input anyways.
 				InputSelect(controlMode);
 				break;
 			default:

@@ -93,12 +93,16 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 
 	#region PhoneDialogueSystem
 	public void MessageSide(bool rightSide) { //Command for making text messages after the command is called spawn on the left or right
-
+		// TODO: Defining Function that specifies side to appear for text
 	}
+
+	// TODO: Pull the phone down or up 
+	// TODO: Set asertation methods at the start of scene through script work to check scene contents
 
 	#endregion
 
 	public void ControlMode(int mode) {
+		// Toggle between different control modes: 0 - normal, 1 - phone
 		gameManager.controlMode = mode;
 	}
 	public void BoxState(int state) {
