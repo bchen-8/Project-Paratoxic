@@ -14,7 +14,8 @@ i kinda suddenly woke up w/ some blood under my fingernails
 and couldn't move my head without hurting like mad
 went to check the mirror and the entire front of my neck had bloody scratches all over
 apparently it happened while i was sleeping
-[MessageSender i=1]What the hell?? Why didn't you ask for help this morning, I knocked on your door n everything
+[MessageSender i=1]What the hell?? 
+Why didn't you ask for help this morning, I knocked on your door n everything
 Why didn't you go to the clinic?
 [MessageSender i=0]it's ok it was mostly surface level, there's like two cuts with a bit of blood
 really red tho, itty bitty flakes of skin in a bunch of neat lines
@@ -22,7 +23,8 @@ feels like i got slapped in the neck with a hot coal
 i patched myself up w the first aid kid
 *kit
 [MessageSender i=1]Dude just go. I'll call them myself if i gotta
-[MessageSender i=0]applied the burn cream stuff whatever tf it is and tied a gauze pad onto the danger zone just to be super safe
+[MessageSender i=0]applied the burn cream stuff whatever tf it is
+and I tied a gauze pad onto the danger zone just to be super safe
 still kind of a pain to move my head but i think it's all good
 also i'd have to walk to the clinic and that sounds like effort and neck pain
 [MessageSender i=1]FFS Morgan, you can't just not tell us when you get hurt
@@ -57,8 +59,8 @@ being in my room without anyone around
 [SetVFX i=0 i=0]i think i might have an idea why this happened
 [MessageSender i=1]Oh?
 [MessageSender i=0][StopMusic]last night i kinda had this
-[SetVFX i=0 i=5]really bizarre nightmare
-[Voice s=MorganGuardedHigh][SpawnVFX s=ShowcaseDream][PlayMusic s=Paratoxic_Horror][ControlMode i=0][BringUpDialogue b=true]It was really dark and foggy in every direction. I couldn't really see anything around me at all.
+[SetVFX i=0 i=5][SpawnVFX s=ShowcaseDream][PlayMusic s=Paratoxic_Horror][ControlMode i=0][BringUpDialogue b=true]really bizarre nightmare
+It was really dark and foggy in every direction. I couldn't really see anything around me at all.
 Except for a mirror, sitting right in front of my face.
 [SetVFX i=1 i=1]Looking into it, I saw these...abrasions. All over my body.
 Made of bone and sinew, protruding and bleeding.
@@ -80,23 +82,16 @@ I knew what I had to do.
 [SetVFX i=1 i=7]It felt like I was on the verge of collapsing as I lifted the dead weight of my arm up, the scalpel firmly grasped between two fingers...
 ...and I decided to start from the top.
 [StopMusic]If I just carved it out...I'd be able to breathe again, right?
-I just wanted to breathe
-[ControlMode i=1][BringUpDialogue b=false][MessageSender i=0][AdvancePhoneText i=7]
-But then, I felt something appear in my hands out of the thinning air.
-A wave of fear almost buckled my legs...
-I knew what I had to do.
-It felt like I was on the verge of collapsing as I lifted the dead weight of my arm up, the scalpel firmly grasped between two fingers...
-...and I decided to start from the top.
-If I just carved it out...I'd be able to breathe again, right?
-I just wanted to breathe
-[MessageSender i=0][SetVFX i=0 i=1]uhh
-hhhhhhhhhhhhhhh
+[EnableQTE s=QTEThroat]I just wanted to breathe
+[BringUpDialogue b=false][MessageSender i=0][SetVFX i=0 i=1][ControlMode i=1] 
+[ControlMode i=1]uhh
+[ControlMode i=1]hhhhhhhhhhhhhhh
 [SetVFX i=0 i=0][PlayMusic s=SoftPianoBeat]i don't remember what happened after that
 [MessageSender i=1]Good god, what the hell dude
 [MessageSender i=0][SetVFX i=0 i=6]huh?
 [MessageSender i=1]We were just out getting food, why do you have to phrase it like that?
 [MessageSender i=0][SetVFX i=0 i=3]oh
-Morgan: um
+um
 [MessageSender i=1]You sure this isn't like...one of your short stories?
 [MessageSender i=0][SetVFX i=0 i=5]what
 no
@@ -106,14 +101,17 @@ this is a thing that actually just happened to me this morning and my neck still
 [MessageSender i=0]are you?
 [MessageSender i=1]I guess reading through what you sent gave me kind of the same feeling
 Maybe you should think about finding a therapist tomorrow
-What you just wrote right there isn't something to be taken lightly. Sounds like it could be indicative of something heavier
+What you just wrote right there isn't something to be taken lightly. 
+Sounds like it could be indicative of something heavier
 [MessageSender i=0][SetVFX i=0 i=5]i told you this never happened before, it's probably just a one time thing
 needed some way to vent about it
 [MessageSender i=1]Anything I should know that you haven't told me?
 [MessageSender i=0][SetVFX i=0 i=2]nahhhhhhh
 hope you enjoyed my shitty creepypasta, like comment n subscribe
-[MessageSender i=1]I mean...look, I get it. You had this freak nightmare, but it looks like you already did everything you could to fix it
-Sorry if it seemed like I was just brushing you off, but I'm not really sure what I can do to help right this second
+[MessageSender i=1]I mean...look, I get it. You had this freak nightmare
+but it looks like you already did everything you could to fix it
+Sorry if it seemed like I was just brushing you off 
+but I'm not really sure what I can do to help right this second
 We're all going to be back soon anyways
 [MessageSender i=0][SetVFX i=0 i=0]i mean
 idk i guess

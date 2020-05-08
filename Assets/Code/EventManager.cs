@@ -120,6 +120,11 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 
 	public void ControlMode(int mode) {
 		// Toggle between different control modes: 0 - normal, 1 - phone
+		if (gameManager.controlMode != 2)
+		{
+			gameManager.previousControlMode = gameManager.controlMode;
+		}
+		
 		gameManager.controlMode = mode;
 	}
 

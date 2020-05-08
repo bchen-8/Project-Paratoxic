@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 
 	//Values
 	public int controlMode;
+	public int previousControlMode;
 	public int initialControlMode;
 	[HideInInspector]
 	public bool playerInControl = true;
@@ -91,7 +92,6 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 				// TODO: Call Next message from Dialogue Manager for phone system
 				// Currently following existing structure to load and prep text through game manager
 				AdvancePhoneText();
-
 				break;
 			case 2:
 				//Block input. Do nothing. 
@@ -193,6 +193,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 	}
 
 	void SetControlMode (int mode) {
+
 		controlMode = mode;
 	}
 	int getControlMode () {

@@ -9,6 +9,7 @@ public class BlockInputUntilTextIsWrittenOut : MonoBehaviour
     private Transform transformToObserve;
     private int previousChildCount;
     private int previousControlModeId;
+    private bool jankFlag;
 
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,8 @@ public class BlockInputUntilTextIsWrittenOut : MonoBehaviour
         eventManager = GameObject.Find("Overlord").GetComponent<EventManager>();
         gameManager = GameObject.Find("Overlord").GetComponent<GameManager>();
         previousControlModeId = gameManager.controlMode;
-        transformToObserve = GameObject.Find("Phone").transform;
-        previousChildCount = transformToObserve.childCount;
+        //transformToObserve = GameObject.Find("Phone").transform;
+        //previousChildCount = transformToObserve.childCount;
     }
 
     // Update is called once per frame
@@ -25,11 +26,17 @@ public class BlockInputUntilTextIsWrittenOut : MonoBehaviour
     {
         if(gameManager.playingDialogue)
         {
-            eventManager.ControlMode(2);
+            gameManager.controlMode = 2;
+            jankFlag = true;
         }
         else
         {
-            eventManager.ControlMode(0);
+            if(jankFlag)
+            {
+                eventManager.ControlMode(gameManager.previousControlMode);
+                jankFlag = false;
+            }
+            
         }
         //if(transformToObserve.childCount > previousChildCount)
         //{
