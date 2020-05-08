@@ -59,7 +59,7 @@ public class PhoneMessage : MonoBehaviour
             transform.GetChild(2).gameObject.active = false;
             dialogueText.alignment = TextAlignmentOptions.TopRight;
             dialogueText.fontSharedMaterial = Resources.Load<Material>("Fonts & Materials/Carlito-Regular SDF User");
-            this.spawn = phone.messageSpawn; 
+            this.spawn = phone.messageSpawn;
         } else { // Other messenger
             // Some hack shit
             bubbleSprite = transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
