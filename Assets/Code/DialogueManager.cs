@@ -39,6 +39,7 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 	public bool autoNext;
 	public float autoNextDelay;
 	Timer AutoNextTimer;
+	public int currentSender;
 
 	public AudioSource musicSource;
 	public AudioSource voiceSource;
@@ -200,9 +201,9 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		// underlay color
 
 		// this default
-		int sender = 0;
+		// int sender = 0;
 
-		dialoguePhoneScript.CreateMessage(sender, finalText);
+		dialoguePhoneScript.CreateMessage(currentSender, finalText);
 
 		// Prefab of texts with lines dumped in
 		// some parameters for left/right align +

@@ -496,7 +496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &258544794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,7 +866,7 @@ MonoBehaviour:
   userSpawn: {fileID: 0}
   messageSpawn: {fileID: 0}
   sentMessages: []
-  defaultMessageDistance: 0.25
+  defaultMessageDistance: 0.3
 --- !u!1 &510952514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,6 +3624,7 @@ MonoBehaviour:
   delayValue: 0
   autoNext: 0
   autoNextDelay: 0
+  currentSender: 0
   musicSource: {fileID: 2037767919}
   voiceSource: {fileID: 2037767923}
 --- !u!4 &2037767917

@@ -54,13 +54,9 @@ public class DialoguePhoneScript : MonoBehaviour
 
         SpriteRenderer messageSprite = phoneMessage.bubbleSprite;
 
-        if (phoneMessage.dialogueText.GetPreferredValues().y > 1.0) // Jank to see if big box needed
+        if (phoneMessage.dialogueText.GetPreferredValues().y > .5) // Jank to see if large box
         {
             messageSprite.sprite = largeBox;
-        } 
-        else if (phoneMessage.dialogueText.GetPreferredValues().y > .5) // Jank to see if medium box
-        {
-            messageSprite.sprite = mediumBox;
         } 
         else // smol box
         {
@@ -71,6 +67,7 @@ public class DialoguePhoneScript : MonoBehaviour
         Vector3 offset = new Vector3(0, defaultMessageDistance, 0) + new Vector3(0, phoneMessage.dialogueText.GetPreferredValues().y, 0);
 
         ShiftMessages(offset);
+        PlayMessageSound(sender);
     }
 
     public void ShiftMessages(Vector3 offset)
@@ -80,5 +77,17 @@ public class DialoguePhoneScript : MonoBehaviour
             phoneMessage.ShiftMessageOffset(offset);
         }
         // Currently adjust offset for all messages
+    }
+
+    public void PlayMessageSound(int sender)
+    {
+        if (sender == 0)
+        {
+            GameManager.eventManager.SFX("MessagePing1");
+        }
+        else
+        {
+            GameManager.eventManager.SFX("MessagePing2");
+        }
     }
 }
