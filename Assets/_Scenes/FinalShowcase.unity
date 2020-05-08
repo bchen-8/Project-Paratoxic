@@ -373,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204153536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.5, z: 10}
+  m_LocalPosition: {x: -2, y: -3.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 471635375}
@@ -754,7 +754,7 @@ MonoBehaviour:
   userSpawn: {fileID: 0}
   messageSpawn: {fileID: 0}
   sentMessages: []
-  defaultMessageDistance: 0.25
+  defaultMessageDistance: 0.4
 --- !u!1 &510952514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1650,7 @@ PrefabInstance:
     - target: {fileID: 2426423935184067740, guid: aca7d813b7cc7e445a4ab71a8dced1ff,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aca7d813b7cc7e445a4ab71a8dced1ff, type: 3}
@@ -3473,6 +3473,7 @@ MonoBehaviour:
   delayValue: 0
   autoNext: 0
   autoNextDelay: 0
+  currentSender: 0
   musicSource: {fileID: 2037767919}
   voiceSource: {fileID: 2037767923}
 --- !u!4 &2037767917
