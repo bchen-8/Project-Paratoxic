@@ -94,9 +94,7 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 
 	#region PhoneDialogueSystem
 	public void MessageSender(int sender) { //Command for making text messages after the command is called spawn on the left or right
-		// TODO: Defining Function that specifies side to appear for text
-		// 
-
+		dialogueManager.Sender = (DialogueManager.SenderTypes)sender;
 	}
 
 	// TODO: Pull the phone down or up - 

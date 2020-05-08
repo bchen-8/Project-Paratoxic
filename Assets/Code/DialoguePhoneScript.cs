@@ -44,7 +44,7 @@ public class DialoguePhoneScript : MonoBehaviour
         
     }
 
-    public void CreateMessage(int sender, string text)
+    public void CreateMessage(DialogueManager.SenderTypes sender, string text)
     { 
         GameObject messageObject = Instantiate(Resources.Load<GameObject>("Art/Phone/PhoneTextBox"), gameObject.transform);
         PhoneMessage phoneMessage = messageObject.GetComponent<PhoneMessage>();
@@ -54,9 +54,10 @@ public class DialoguePhoneScript : MonoBehaviour
 
         SpriteRenderer messageSprite = phoneMessage.bubbleSprite;
 
-        if (phoneMessage.dialogueText.GetPreferredValues().y > .5) // Jank to see if large box
+        if (phoneMessage.dialogueText.GetPreferredValues().y > .5) // Jank to see if big box needed
         {
             messageSprite.sprite = largeBox;
+            // messageSprite.gameObject.transform.localScale = new Vector3(messageSprite.gameObject.transform.localScale.x, phoneMessage.dialogueText.GetPreferredValues().y + 0.1f, messageSprite.gameObject.transform.localScale.z);
         } 
         else // smol box
         {
