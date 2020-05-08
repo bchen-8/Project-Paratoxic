@@ -89,6 +89,7 @@ public class DialogueBoxScript : MonoBehaviour {
 				Debug.Log("Stepping a distance of ["+step+"]");
 				pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, l, step);
 				Debug.Log("Current position: [" + pointerTransform.position + "]");*/
+				Debug.Log("AAA");
 				pointerTransform.localPosition = Vector3.Lerp(pointerTransform.localPosition, l, 0.3f);
 				yield return new WaitForSeconds(0.025f);
 			}
