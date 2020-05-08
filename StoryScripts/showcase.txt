@@ -1,4 +1,4 @@
-[SpawnVFX s=ShowcaseMorgan][SpawnVFX s=ShowcaseContentWarning][MessageSender i=0][SetVFX i=0 i=0][PlayMusic s=ShowcaseScene]jules
+[SpawnVFX s=ShowcaseMorgan][SpawnVFX s=ShowcaseContentWarning][MessageSender i=0][SetVFX i=0 i=0][PlayMusic s=ShowcaseSceneMusic]jules
 julesjulesjulesjules
 juuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuules
 @OrangeJules-ce
@@ -79,7 +79,7 @@ My eyes weighed heavily. I shouldn't have been conscious.
 I knew what I had to do.
 [SetVFX i=1 i=7]It felt like I was on the verge of collapsing as I lifted the dead weight of my arm up, the scalpel firmly grasped between two fingers...
 ...and I decided to start from the top.
-[StopMusic][EnableQTE s=QTEThroat]If I just carved it out...I'd be able to breathe again, right?
+[StopMusic]If I just carved it out...I'd be able to breathe again, right?
 I just wanted to breathe
 [ShiftControl i=1][BringUpDialogue b=false][MessageSender i=0][AdvancePhoneText i=7]
 But then, I felt something appear in my hands out of the thinning air.
@@ -91,7 +91,7 @@ If I just carved it out...I'd be able to breathe again, right?
 I just wanted to breathe
 [MessageSender i=0][SetVFX i=0 i=1]uhh
 hhhhhhhhhhhhhhh
-[SetVFX i=0 i=0][PlayMusic s=ShowcaseScene]i don't remember what happened after that
+[SetVFX i=0 i=0][PlayMusic s=SoftPianoBeat]i don't remember what happened after that
 [MessageSender i=1]Good god, what the hell dude
 [MessageSender i=0][SetVFX i=0 i=6]huh?
 [MessageSender i=1]We were just out getting food, why do you have to phrase it like that?
@@ -124,7 +124,7 @@ you know how it is when you talk about something that's been bubbling in your he
 sorry if this is kinda weird
 [SetVFX i=0 i=1][SetVFX i=0 i=1]dreams are some weird shit and this one tried to kill me apparently
 [MessageSender i=1]Yeah, I've never heard of anything like this before
-[MessageSender i=0][SetVFX i=0 i=0]i think i'm feeling a little better now though
+[MessageSender i=0][SetVFX i=0 i=0][PlayMusic s=UpbeatPianoBeat]i think i'm feeling a little better now though
 so
 [MessageSender i=1]Glad to hear it
 The bus is running kinda late right now, I'd say give us maybe half an hour to get back
