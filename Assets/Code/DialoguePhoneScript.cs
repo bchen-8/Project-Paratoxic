@@ -44,7 +44,7 @@ public class DialoguePhoneScript : MonoBehaviour
         
     }
 
-    public void CreateMessage(int sender, string text)
+    public void CreateMessage(DialogueManager.SenderTypes sender, string text)
     { 
         GameObject messageObject = Instantiate(Resources.Load<GameObject>("Art/Phone/PhoneTextBox"), gameObject.transform);
         PhoneMessage phoneMessage = messageObject.GetComponent<PhoneMessage>();

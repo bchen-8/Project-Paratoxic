@@ -43,6 +43,13 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 	public AudioSource musicSource;
 	public AudioSource voiceSource;
 
+	public enum SenderTypes
+	{
+		MAIN,
+		OTHER
+	}
+	public SenderTypes Sender { get; set; }
+
 	void Awake(){ //instantiate dialoguemanager script and maintain between scenes
 		if (!dialogueManager){
 			dialogueManager = this;
@@ -200,9 +207,8 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		// underlay color
 
 		// this default
-		int sender = 1;
-
-		dialoguePhoneScript.CreateMessage(sender, finalText);
+		
+		dialoguePhoneScript.CreateMessage(Sender, finalText);
 
 		// Prefab of texts with lines dumped in
 		// some parameters for left/right align +
