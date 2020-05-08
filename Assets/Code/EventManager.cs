@@ -94,9 +94,7 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 
 	#region PhoneDialogueSystem
 	public void MessageSender(int sender) { //Command for making text messages after the command is called spawn on the left or right
-		// TODO: Defining Function that specifies side to appear for text
-		// 
-
+		dialogueManager.Sender = (DialogueManager.SenderTypes)sender;
 	}
 
 	// TODO: Pull the phone down or up - 
@@ -387,10 +385,9 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 			VFXScriptInstance.SetIndex(VFXList.Count - 1);
 		}
 	}
-
-	public void SetVFX(int index, int state)
-	{
-
+	public void SetVFX(int index, int state) {
+		Animator VFXScriptAnimator = VFXList[index].GetComponent<Animator>();
+		VFXScriptAnimator.SetInteger("animState", state);
 	}
 	public void EndVFX(int index) {
 		if ((index == -1) || index >= VFXList.Count) {
