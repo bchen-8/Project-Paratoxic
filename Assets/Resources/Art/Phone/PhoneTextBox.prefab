@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b455e14c5980cfd4cb1342fad6a2b121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.5
+  scrollSpeed: 0.125
   bubbleSprite: {fileID: 0}
   dialogueTextObject: {fileID: 0}
   dialogueText: {fileID: 0}
