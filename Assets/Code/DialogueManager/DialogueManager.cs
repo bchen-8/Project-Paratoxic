@@ -12,10 +12,17 @@ namespace Paratoxic.DialogueManager
         private StreamReader script;
         private TextCommands textCommands;
 
-        private List<long> numOfBytesToOffsetToSpecificLine;
-        private int currentLineNumber = 0;
+        protected List<long> numOfBytesToOffsetToSpecificLine;
+        protected int CurrentLineNumber { get; set; } = 0;
         public bool IsDelaying { get; set; }
         protected float secondsOfDelayLeft = 0f;
+        protected bool IsAudoAdvancing { get; set; } = false;
+        [SerializeField]
+        private float secondsBetweenAutoAdvancedMessages;
+        protected float SecondsBetweenAutoAdvancedMessages { get { return secondsBetweenAutoAdvancedMessages; } set { secondsBetweenAutoAdvancedMessages = value; } }
+
+        private Queue eventQueue;
+        private List<object[]> eventQueueParamList = new List<object[]>();
 
         // Start is called before the first frame update
         void Start()
@@ -58,20 +65,20 @@ namespace Paratoxic.DialogueManager
 
         public void LoadNextLine()
         {
-            currentLineNumber++;
+            CurrentLineNumber++;
             LoadLine();
         }
 
         public void JumpToLine(int lineNumber)
         {
-            currentLineNumber = lineNumber;
+            CurrentLineNumber = lineNumber;
             LoadLine();
         }
 
         private void LoadLine()
         {
-            script.BaseStream.Position = numOfBytesToOffsetToSpecificLine[currentLineNumber];
-            Debug.Log($"Reading line number {currentLineNumber}");
+            script.BaseStream.Position = numOfBytesToOffsetToSpecificLine[CurrentLineNumber];
+            Debug.Log($"Reading line number {CurrentLineNumber}");
             string line = script.ReadLine();
             DisplayLine(line);
         }
@@ -90,7 +97,27 @@ namespace Paratoxic.DialogueManager
                 textCommands.ProcessEvent(match.Value.Substring(1, match.Value.Length - 2), isStartOfLine: true);
             }
 
+            StartCoroutine("ParseEventQueue");
+
             return line.Substring(capturedBrackets.Length);
+        }
+
+        //Move this to TextCommands, tomorrow.
+        private IEnumerator ParseEventQueue()
+        {
+            int count = 0;
+            while(eventQueue.Count > 0)
+            {
+                if (eventQueue.Peek().ToString().Equals("Delay"))
+                {
+                    DelayTextForSeconds((float)eventQueueParamList[count][0]);
+                    yield return new WaitForSeconds(secondsOfDelayLeft);
+                }
+                else
+                {
+                    //typeof(EventManager).GetMethod(eventQueue.Dequeue().ToString()).Invoke(eve)
+                }
+            }
         }
 
         protected string ProcessSingleBracket(string lineToProcess)

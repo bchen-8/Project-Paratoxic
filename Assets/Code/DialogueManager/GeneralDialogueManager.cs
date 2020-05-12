@@ -90,10 +90,15 @@ namespace Paratoxic.DialogueManager
             dialogueBox.SetTalking(false);
             IsPlayingDialogue = false;
 
-            if (autoNext == true && lineIndex < sceneScript.Count)
+            if (IsAudoAdvancing && CurrentLineNumber < numOfBytesToOffsetToSpecificLine.Count)
             {
                 AutoAdvance();
             }
+        }
+
+        private void AutoAdvance()
+        {
+            Timer.Register(SecondsBetweenAutoAdvancedMessages, () => LoadNextLine());
         }
     }
 }
