@@ -81,7 +81,6 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 		historyTextObject.SetActive(false);
 		historyText.text = "";
 		
-
 		autoNext = false;
 
 		string testString = "showcase"; //tempcode
