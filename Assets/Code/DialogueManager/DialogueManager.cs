@@ -97,27 +97,9 @@ namespace Paratoxic.DialogueManager
                 textCommands.ProcessEvent(match.Value.Substring(1, match.Value.Length - 2), isStartOfLine: true);
             }
 
-            StartCoroutine("ParseEventQueue");
+            StartCoroutine(textCommands.ParseEventQueue());
 
             return line.Substring(capturedBrackets.Length);
-        }
-
-        //Move this to TextCommands, tomorrow.
-        private IEnumerator ParseEventQueue()
-        {
-            int count = 0;
-            while(eventQueue.Count > 0)
-            {
-                if (eventQueue.Peek().ToString().Equals("Delay"))
-                {
-                    DelayTextForSeconds((float)eventQueueParamList[count][0]);
-                    yield return new WaitForSeconds(secondsOfDelayLeft);
-                }
-                else
-                {
-                    //typeof(EventManager).GetMethod(eventQueue.Dequeue().ToString()).Invoke(eve)
-                }
-            }
         }
 
         protected string ProcessSingleBracket(string lineToProcess)
@@ -137,5 +119,7 @@ namespace Paratoxic.DialogueManager
         }
 
         protected abstract void ResetVariables();
+
+        protected abstract void DisplayEntireLineAtOnce(string line);
     }
 }

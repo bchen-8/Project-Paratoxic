@@ -13,12 +13,17 @@ public class TextCommands : MonoBehaviour //Processes commands and passes them b
 	public static DialogueManager dialogueManager;
 	public static EventManager eventManager;
 	public AudioClip[] voiceClips = new AudioClip[4];
+	private Paratoxic.DialogueManager.DialogueManager newDialogueManager; //Will replace the original DialogueManager with this at some point, but it's here for now to get rid of the errors and mark what I've "converted"
+
+	private Queue eventQueue = new Queue();
+	private List<object[]> eventQueueParamList = new List<object[]>();
 
 	void Start()
 	{
 		gameManager = GetComponent<GameManager>();
 		dialogueManager = GetComponent<DialogueManager>();
 		eventManager = GetComponent<EventManager>();
+		newDialogueManager = GetComponent<Paratoxic.DialogueManager.DialogueManager>();
 	}
 
 	public void CheckBracket(int givenIndex, bool isStartOfLine){ //checks bracket command and performs appropriate measures. repeats if another command immediately follows
@@ -86,8 +91,8 @@ public class TextCommands : MonoBehaviour //Processes commands and passes them b
 			invokerParams = null;
 		}
 		if (isStartOfLine == true) { //if this event is being processed at the start of the line, send event and params to GameManager
-			gameManager.eventQueue.Enqueue(eventName);
-			gameManager.eventQueueParamList.Add(invokerParams);
+			eventQueue.Enqueue(eventName);
+			eventQueueParamList.Add(invokerParams);
 		} else { //if this event is being processed in the middle of the line, call it immediately from eventManager
 			try {
 				Debug.Log("Condition eventName == Delay is "+(eventName=="Delay")+", Condition gameManager.playingDialogue== false is "+(gameManager.playingDialogue==false));
@@ -184,5 +189,26 @@ public class TextCommands : MonoBehaviour //Processes commands and passes them b
 				return floatArr;
 			}
 		}
+	}
+
+	public IEnumerator ParseEventQueue()
+	{
+		gameManager.PlayerInControl = false;
+		int count = 0;
+		while (eventQueue.Count > 0)
+		{
+			if (eventQueue.Peek().ToString().Equals("Delay"))
+			{
+				newDialogueManager.DelayTextForSeconds((float)eventQueueParamList[count][0]);
+				yield return new WaitForSeconds((float)eventQueueParamList[count][0]);
+			}
+			else
+			{
+				typeof(EventManager).GetMethod(eventQueue.Dequeue().ToString()).Invoke(eventManager, eventQueueParamList[count]);
+			}
+			count++;
+		}
+		eventQueueParamList.Clear();
+		gameManager.PlayerInControl = false;
 	}
 }

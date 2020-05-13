@@ -16,9 +16,12 @@ namespace Paratoxic.DialogueManager
         [SerializeField]
         private bool isPlayingDialogue;
         public bool IsPlayingDialogue { get { return isPlayingDialogue; } private set { isPlayingDialogue = value; } }
+        [SerializeField]
+        private float delayBetweenEachLetter = 0.04f;
 
         private List<char> specialChars = new List<char> { ' ', '[', ']', '<', '>', '=' };
         private TextMeshPro dialogueText;
+        private Coroutine WrittingTextOut;
 
         // Start is called before the first frame update
         void Start()
@@ -33,9 +36,34 @@ namespace Paratoxic.DialogueManager
         
         }
 
+        protected override void DisplayEntireLineAtOnce(string line)
+        {
+            IsPlayingDialogue = false;
+            if (WrittingTextOut != null)
+            {
+                StopCoroutine(WrittingTextOut);
+            }
+            PlayCharSoundBite();
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (IsItABracket(line[i]))
+                {
+                    //Warning: It's possible that altering the string like this mid-loop will cause "Out of bounds" funkiness because the length is variable. Keep an eye out for that.
+                    line = ProcessSingleBracket(line);
+                }
+                if (IsDelaying)
+                {
+                    IsDelaying = false;
+                    secondsOfDelayLeft = 0f;
+                }
+                //Warning: It's possible that writing <tags> character by character won't trigger the intended effects. Keep an eye out for that.
+                dialogueText.text += line[i];
+            }
+        }
+
         protected override void DisplayLine(string line)
         {        
-            StartCoroutine(WriteTextOut(line));
+            WrittingTextOut = StartCoroutine(WriteTextOut(line));
         }
 
         private IEnumerator WriteTextOut(string line)
@@ -61,10 +89,11 @@ namespace Paratoxic.DialogueManager
                 //Warning: It's possible that writing <tags> character by character won't trigger the intended effects. Keep an eye out for that.
                 PlayCharSoundBite(parsedLine[i]);
                 dialogueText.text += parsedLine[i];
-                yield return null;
+                yield return new WaitForSeconds(delayBetweenEachLetter);
             }
 
             ResetVariables();
+            WrittingTextOut = null;
         }
 
         private bool IsItABracket(char character)
@@ -72,7 +101,7 @@ namespace Paratoxic.DialogueManager
             return character == '[';
         }
 
-        void PlayCharSoundBite(char character)
+        void PlayCharSoundBite(char character = 'a')
         {
             if (specialChars.Contains(character))
             {
@@ -100,5 +129,7 @@ namespace Paratoxic.DialogueManager
         {
             Timer.Register(SecondsBetweenAutoAdvancedMessages, () => LoadNextLine());
         }
+
+        
     }
 }

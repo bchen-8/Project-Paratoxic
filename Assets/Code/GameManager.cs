@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 	public int controlMode;
 	public int previousControlMode;
 	public int initialControlMode;
-	[HideInInspector]
-	public bool playerInControl = true;
+	public bool PlayerInControl { get; set; } = true;
     [HideInInspector]
 	public bool playerInChoice = false;
 	[HideInInspector]
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
     // Update is called once per frame
     void Update()
     {
-		if (playerInControl == true){
+		if (PlayerInControl == true){
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)){
 				InputSelect(controlMode);
 			}
@@ -164,7 +163,7 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 
     IEnumerator ParseQueue(){ //Runs through start-of-line events
 		Debug.Log("Parsing queue...");
-        playerInControl = false;
+        PlayerInControl = false;
 		int count = 0;
 		Type type = typeof(EventManager);
 		MethodInfo mi;
@@ -181,16 +180,9 @@ public class GameManager : MonoBehaviour //Manages general game logic, communica
 			count++;
         }
 		eventQueueParamList.Clear();
-        playerInControl = true;
+        PlayerInControl = true;
 		yield return null;
     }
-
-	void SetPlayerControl (bool control) {
-		playerInControl = control;
-	}
-	bool getPlayerControl () {
-		return playerInControl;
-	}
 
 	void SetControlMode (int mode) {
 
