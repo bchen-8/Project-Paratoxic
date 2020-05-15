@@ -60,7 +60,7 @@ being in my room without anyone around
 [MessageSender i=1]Oh?
 [MessageSender i=0][StopMusic]last night i kinda had this
 [SetVFX i=0 i=5][SpawnVFX s=ShowcaseDream][PlayMusic s=Paratoxic_Horror][ControlMode i=0][BringUpDialogue b=true][BlockInputWhilePrinting b=true]really bizarre nightmare
-It was really dark and foggy in every direction. I couldn't really see anything around me at all.
+[SpawnVFX s=DreamTextBG]It was really dark and foggy in every direction. I couldn't really see anything around me at all.
 Except for a mirror, sitting right in front of my face.
 [SetVFX i=1 i=1]Looking into it, I saw these...abrasions. All over my body.
 Made of bone and sinew, protruding and bleeding.
@@ -83,7 +83,7 @@ I knew what I had to do.
 ...and I decided to start from the top.
 [StopMusic]If I just carved it out...I'd be able to breathe again, right?
 I just wanted to breathe
-[EnableQTE s=QTEThroat]I just wanted to breathe
+[RemoveVFX i=2][EnableQTE s=QTEThroat]I just wanted to breathe
 [BringUpDialogue b=false][MessageSender i=0][SetVFX i=0 i=1][BlockInputWhilePrinting b=false]uhh
 hhhhhhhhhhhhhhh
 [SetVFX i=0 i=0][PlayMusic s=SoftPianoBeat]i don't remember what happened after that
