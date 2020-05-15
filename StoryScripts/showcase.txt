@@ -63,7 +63,7 @@ being in my room without anyone around
 [MessageSender i=0][StopMusic]last night i kinda had this
 [MessageSender i=0][SetVFX i=0 i=5]really bizarre nightmare
 [SetVFX i=0 i=5][SpawnVFX s=ShowcaseDream][PlayMusic s=Paratoxic_Horror][ControlMode i=0][BringUpDialogue b=true][BlockInputWhilePrinting b=true]i'm not sure where to begin
-[SpawnVFX s=DreamTextBG]...it was dark and foggy in every direction. I couldn't really see anything around me at all.
+[SpawnVFX s=DreamTextBG][Voice s=MorganGuardedHigh]...it was dark and foggy in every direction. I couldn't really see anything around me at all.
 Except for a mirror, sitting right in front of my face.
 [SetVFX i=1 i=1]Looking into it, I saw these...<color=red>abrasions</color>. All over my body.
 Made of bone and sinew, protruding and bleeding.

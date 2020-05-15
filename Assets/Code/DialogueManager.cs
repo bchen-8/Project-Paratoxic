@@ -266,12 +266,11 @@ public class DialogueManager : MonoBehaviour //Handles all text functionality
 	}
 	#endregion
 
-	void PlayVoiceClip() { //play a voice clip if the current character is not a space
-		if (voiceSource.isPlaying == true) {
-			voiceSource.Stop();
-		}
+	void PlayVoiceClip() { //Play a voice clip from the voice AudioSource on Overlord if the current character is not a space/command related character
 		if (finalText[textIndex] != ' ' || finalText[textIndex] != '[' || finalText[textIndex] != '<' || finalText[textIndex] != ']' || finalText[textIndex] != '>' || finalText[textIndex] != '=') {
+			if (voiceSource.isPlaying == false) {
 				voiceSource.Play();
+			}
 		}
 	}
 
