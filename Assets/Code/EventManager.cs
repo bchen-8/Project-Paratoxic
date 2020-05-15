@@ -147,12 +147,21 @@ public class EventManager : MonoBehaviour //Handles events, such as dialogue box
 	public void AdvancePhoneText(int messages)
 	{
 		DialoguePhoneScript phoneScript = dialogueManager.dialoguePhoneScript;
-		phoneScript.playSounds = false;
+		bool shouldReenableSound = false;
+		if (phoneScript.playSounds == true)
+		{
+			shouldReenableSound = true;
+			phoneScript.playSounds = false;
+		}
+		
 		for (int i = 0; i < messages; i++)
 		{
 			gameManager.AdvancePhoneText();
 		}
-		phoneScript.playSounds = true;
+		if (shouldReenableSound)
+		{
+			phoneScript.playSounds = true;
+		}
 	}
 
 	public void BoxState(int state) {
